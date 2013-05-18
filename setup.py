@@ -4,9 +4,9 @@ from setuptools import find_packages
 import time
 
 
-_version = "1.1.dev%s" % int(time.time())
+_version = "1.1.1dev%s" % int(time.time())
 _packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests", "example"])
-    
+
 # common dependencies
 _install_requires = [
             'django>=1.4,<1.6',
