@@ -410,7 +410,17 @@ class FlowPositionInstance(object):
 
         if response is None:
             # now that everything is set up, we can handle the request
-            response = self.get_action().dispatch(request, *args, **kwargs)
+
+            # FIXME: mjtamlyn promises to fix this in Django 1.7, but right now we need
+            # to set up the magic attributes usually set up by a closure in View.as_view
+            # so we can call dispatch on Django>1.5
+            action = self.get_action()
+            if hasattr(action, 'request'):
+                raise Exception('Action re-use?')
+            action.request = request
+            action.args = args
+            action.kwargs = kwargs
+            response = action.dispatch(request, *args, **kwargs)
 
             # if this is a GET request, then we displayed something to the user, so
             # we should record this in the history, unless the request returned a
