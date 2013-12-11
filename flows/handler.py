@@ -230,7 +230,7 @@ class FlowHandler(FlowHandlerBase):
             query.update(url_queryargs)
 
         parts = list(parts)
-        parts[4] = urllib.urlencode(query)
+        parts[4] = urllib.urlencode(query, doseq=True)
 
         return urlparse.urlunparse(parts)
 
