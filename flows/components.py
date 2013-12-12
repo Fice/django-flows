@@ -258,6 +258,9 @@ class FlowRenderer(object):
     def form_action(self):
         return self.flow_component.get_absolute_url()
 
+    def form_action_post(self):
+        return self.flow_component.get_absolute_url(include_flow_id=False)
+
     def flow_support(self):
         field = "<input type='hidden' name='%s' value='%s'/>" % (config.FLOWS_TASK_ID_PARAM, self.flow_component.task_id)
         return mark_safe(field)
@@ -293,7 +296,7 @@ class Action(FlowComponent, FormView):
         ctx['flow'] = FlowRenderer(self)
         return ctx
 
-    def get_absolute_url(self):
+    def get_absolute_url(self, include_flow_id=True):
         return self._flow_position_instance.get_absolute_url()
 
     @classmethod
