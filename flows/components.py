@@ -297,7 +297,7 @@ class Action(FlowComponent, FormView):
         return ctx
 
     def get_absolute_url(self, include_flow_id=True):
-        return self._flow_position_instance.get_absolute_url()
+        return self._flow_position_instance.get_absolute_url(include_flow_id=include_flow_id)
 
     @classmethod
     def get_initial_action_tree(cls):
