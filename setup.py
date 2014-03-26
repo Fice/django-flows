@@ -4,7 +4,7 @@ from setuptools import find_packages
 import time
 
 
-_version = "1.1.3-lp" % int(time.time())
+_version = "1.1.3.dev%s-lp" % int(time.time())
 _packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests", "example"])
 
 # common dependencies
