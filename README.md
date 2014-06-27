@@ -199,3 +199,7 @@ If you are using the `DjangoStateStore` backend (which is the default), then the
 - `flows.additional.celery.cleanup_task`
    
    If you are using [Celery](http://celeryproject.org/) then you can use this provided task to clean up old task state every 5 minutes.
+
+Disable ATOMIC\_REQUESTS for one Action
+---
+If you are using `ATOMIC_REQUESTS` and want to disable it on one specific Action, set a class attribute with `non_atomic_requests = True`
