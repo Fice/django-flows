@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 from weakref import WeakSet
+from django.db import transaction
 from django.conf.urls import patterns, url, include
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
@@ -162,8 +163,15 @@ class FlowHandler(FlowHandlerBase):
 
         elif issubclass(flow_component, Action):
             name = flow_position.get_url_name(include_app_namespace=False)
+            view = self._view(flow_position)
+            # If flow component class has a non_atomic_requests class
+            # attribute set to True, then decorate the view with
+            # django.db.transaction.non_atomic_requests
+            non_atomic_requests = getattr(flow_component, 'non_atomic_requests', None)
+            if non_atomic_requests:
+                view = transaction.non_atomic_requests(view)
             for u in flow_urls:
-                urlpatterns += patterns('', url(u, self._view(flow_position), name=name))
+                urlpatterns += patterns('', url(u, view, name=name))
 
         else:
             raise TypeError(str(flow_component))
