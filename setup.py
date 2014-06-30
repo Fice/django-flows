@@ -4,7 +4,7 @@ from setuptools import find_packages
 import time
 
 
-_version = "1.1.5.dev%s-lp" % int(time.time())
+_version = "1.1.5"
 _packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests", "example"])
 
 # common dependencies
@@ -12,8 +12,7 @@ _install_requires = [
             'django>=1.4,<1.7',
        ]
 
-_short_description = "django-flows keeps state and position in complicated flows of logic, allowing optional " \
-                     "branches and complicated paths through a series of individual user actions."
+_short_description = "django-flows keeps state and position in complicated flows of logic, allowing optional "                      "branches and complicated paths through a series of individual user actions."
 _long_description = """
 django-flows can best be described as 'wizards on steroids'. Its purpose is to keep state and position
 in complicated flows of logic, allowing optional branches and complicated paths through a series of
